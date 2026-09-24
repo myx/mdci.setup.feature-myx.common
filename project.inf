@@ -1,0 +1,7 @@
+Name: setup.feature-myx.common
+Requires: 
+Provides: \
+	os-myx.common \
+	standard/os-myx.common \
+	myx.common/os-myx.common \
+	image-install:exec-update-before:sh-scripts/install-myx.common.sh \
