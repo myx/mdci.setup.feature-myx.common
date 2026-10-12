@@ -1,8 +1,6 @@
 Name: setup.feature-myx.common
 Requires: 
 Provides: \
-	os-myx.common \
-	standard/os-myx.common \
-	myx/setup.feature-myx.common \
+	standard/setup.feature-myx.common \
 	\
-	image-install:exec-update-before:sh-scripts/install-myx.common.sh \
+	image-install:exec-update-before:host/install/common-myx.common.txt \

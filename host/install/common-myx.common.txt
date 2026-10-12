@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# The only place myx.common is bootstrapped. MYX_COMMON_SKIP_INSTALL, set to anything, disables it.
+
+[ -z "$MYX_COMMON_SKIP_INSTALL" ] || exit 0
+
+installUrl="https://raw.githubusercontent.com/myx/os-myx.common/master/sh-scripts/install-myx.common.sh"
+
+if command -v curl > /dev/null 2>&1 ; then
+	downloadCommand="curl -fsSL"
+elif command -v fetch > /dev/null 2>&1 ; then
+	downloadCommand="fetch -qo -"
+else
+	downloadCommand="wget -qO -"
+fi
+
+# the script is held first, so a failed download is an error and never an empty script that succeeds
+installScript="$($downloadCommand "$installUrl")" || installScript=""
+[ -n "$installScript" ] || { echo "⛔ ERROR: myx.common: could not download $installUrl with: $downloadCommand" >&2 ; exit 1 ; }
+
+printf '%s\n' "$installScript" | sh -e
